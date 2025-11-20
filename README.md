@@ -49,7 +49,7 @@ emcc cpp/convert.cpp -O3 `
   -s MODULARIZE=1 `
   -s EXPORT_NAME=ConvertModule `
   -s EXPORTED_FUNCTIONS='[_gen_latex,_gen_csv,_free]' `
-  -s EXPORTED_RUNTIME_METHODS='["cwrap","UTF8ToString","_free"]' `
+  -s EXPORTED_RUNTIME_METHODS='["cwrap","UTF8ToString"]' `
   -o dist/convert.js
 ```
 
