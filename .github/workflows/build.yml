@@ -40,4 +40,10 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add dist/
         git diff --staged --quiet || git commit -m "Auto-build WASM files"
-        git push
+        
+        # Push to the correct branch
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          git push origin HEAD:refs/heads/${{ github.head_ref }}
+        else
+          git push origin HEAD:refs/heads/${{ github.ref_name }}
+        fi
