@@ -10,6 +10,16 @@
 <h2>データ変換</h2>
 <label for="input">入力データ:</label>
 <textarea id="input" rows="8" placeholder="データを貼り付け"></textarea><br>
+<fieldset>
+  <legend>丸め方式を選択:</legend>
+  <label><input type="radio" name="round-mode" value="none" checked> 丸めなし</label>
+  <label><input type="radio" name="round-mode" value="decimal"> 小数点以下の桁数</label>
+  <label><input type="radio" name="round-mode" value="sig-figs"> 有効数字</label>
+</fieldset>
+<label for="decimals">小数点以下桁数:</label>
+<input type="number" id="decimals" min="0" value="2">
+<label for="sig-figs">有効数字:</label>
+<input type="number" id="sig-figs" min="1" value="3"><br>
 <button id="latex-btn">LaTeX</button>
 <button id="csv-btn">CSV</button>
 <h3>LaTeX</h3>
