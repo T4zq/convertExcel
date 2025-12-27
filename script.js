@@ -7,6 +7,8 @@ const sigFigs = document.getElementById('sig-figs');
 const filename = document.getElementById('filename');
 const legendPos = document.getElementById('legend-pos');
 const scaleMode = document.getElementById('scale-mode');
+const previewBtn = document.getElementById('preview-btn');
+const tikzPreview = document.getElementById('tikz-preview');
 
 ConvertModule().then(M => {
   const call = (ptr) => { const s = M.UTF8ToString(ptr); M._free(ptr); return s; };
@@ -59,6 +61,23 @@ ConvertModule().then(M => {
       const lp = legendPos.value || 'north west';
       const sm = scaleMode.value || 'linear';
       tikz.value = call(genTikzGraph(data, fname, sf, lp, sm));
+    }
+  };
+  
+  previewBtn.onclick = () => {
+    const tikzCode = tikz.value.trim();
+    if (tikzCode) {
+      // TikZコードからtikzpicture部分を抽出
+      tikzPreview.innerHTML = '';
+      const script = document.createElement('script');
+      script.type = 'text/tikz';
+      script.textContent = tikzCode;
+      tikzPreview.appendChild(script);
+      
+      // TikZJaxを再実行してレンダリング
+      if (window.tikzjax) {
+        window.tikzjax.processTikz();
+      }
     }
   };
 });

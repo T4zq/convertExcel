@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>データ変換</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
 </head>
 <body>
 <h2>データ変換</h2>
@@ -50,7 +52,10 @@
 <textarea id="csv" rows="8" placeholder="CSV形式で出力されます"></textarea>
 <h3>TikZ グラフ</h3>
 <label for="tikz">TikZ グラフ出力:</label><br>
-<textarea id="tikz" rows="15" placeholder="TikZ/PGFPlotsグラフコードが出力されます"></textarea>
+<textarea id="tikz" rows="15" placeholder="TikZ/PGFPlotsグラフコードが出力されます"></textarea><br>
+<button id="preview-btn">プレビュー表示</button>
+<h3>TikZ プレビュー</h3>
+<div id="tikz-preview" style="border: 1px solid #ccc; padding: 10px; min-height: 200px; background: white;"></div>
 <script src="dist/convert.js"></script>
 <script src="script.js"></script>
 </body>
