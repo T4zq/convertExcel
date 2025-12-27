@@ -166,32 +166,6 @@ std::string to_csv(const Table &t) {
   return out;
 }
 
-std::string to_csv_rounded(const Table &t, int decimals) {
-  std::string out;
-  for (size_t i = 0; i < t.size(); ++i) {
-    for (size_t j = 0; j < t[i].size(); ++j) {
-      if (j) out += ',';
-      std::string cell = round_number(t[i][j], decimals);
-      out += cell;
-    }
-    if (i + 1 < t.size()) out += '\n';
-  }
-  return out;
-}
-
-std::string to_csv_sig_figs(const Table &t, int sig_figs) {
-  std::string out;
-  for (size_t i = 0; i < t.size(); ++i) {
-    for (size_t j = 0; j < t[i].size(); ++j) {
-      if (j) out += ',';
-      std::string cell = round_significant_figures(t[i][j], sig_figs);
-      out += cell;
-    }
-    if (i + 1 < t.size()) out += '\n';
-  }
-  return out;
-}
-
 char* dup(const std::string &s) {
   char *p = (char*)malloc(s.size() + 1);
   memcpy(p, s.c_str(), s.size() + 1);
@@ -208,13 +182,7 @@ EMSCRIPTEN_KEEPALIVE char* gen_csv(const char* in) {
 EMSCRIPTEN_KEEPALIVE char* gen_latex_rounded(const char* in, int decimals) {
   return in ? dup(to_latex_rounded(parse(in), decimals)) : dup("");
 }
-EMSCRIPTEN_KEEPALIVE char* gen_csv_rounded(const char* in, int decimals) {
-  return in ? dup(to_csv_rounded(parse(in), decimals)) : dup("");
-}
 EMSCRIPTEN_KEEPALIVE char* gen_latex_sig_figs(const char* in, int sig_figs) {
   return in ? dup(to_latex_sig_figs(parse(in), sig_figs)) : dup("");
-}
-EMSCRIPTEN_KEEPALIVE char* gen_csv_sig_figs(const char* in, int sig_figs) {
-  return in ? dup(to_csv_sig_figs(parse(in), sig_figs)) : dup("");
 }
 }
